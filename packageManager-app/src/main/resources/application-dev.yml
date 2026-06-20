@@ -16,7 +16,7 @@ thread:
 spring:
   datasource:
     username: root
-    password: 123456
+    password: 523Hust.985
     url: jdbc:mysql://127.0.0.1:3306/package_manager?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
