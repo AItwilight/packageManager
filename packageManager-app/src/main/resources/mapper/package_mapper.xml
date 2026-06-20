@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huster.infrastructure.dao.IPackageDao">
+
+    <resultMap id="BaseResultMap" type="com.huster.infrastructure.dao.po.PackagePO">
+        <id column="id" property="id"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="waybill_no" property="waybillNo"/>
+        <result column="phone" property="phone"/>
+        <result column="courier" property="courier"/>
+        <result column="shelf" property="shelf"/>
+        <result column="status" property="status"/>
+        <result column="checkin_time" property="checkinTime"/>
+        <result column="pickup_time" property="pickupTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.huster.infrastructure.dao.po.PackagePO"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO package (biz_id, waybill_no, phone, courier, shelf, status, checkin_time)
+        VALUES (#{bizId}, #{waybillNo}, #{phone}, #{courier}, #{shelf}, #{status}, #{checkinTime})
+    </insert>
+
+    <select id="queryByBizId" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM package WHERE biz_id = #{bizId}
+    </select>
+
+    <select id="queryByWaybillNoAndStatus" parameterType="com.huster.infrastructure.dao.po.PackagePO"
+            resultMap="BaseResultMap">
+        SELECT * FROM package
+        WHERE waybill_no = #{waybillNo} AND status = #{status}
+        LIMIT 1
+    </select>
+
+    <select id="queryPage" parameterType="com.huster.infrastructure.dao.po.PackagePO"
+            resultMap="BaseResultMap">
+        SELECT * FROM package
+        <where>
+            <if test="phone != null and phone != ''">
+                AND phone = #{phone}
+            </if>
+            <if test="waybillNo != null and waybillNo != ''">
+                AND (waybill_no LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR phone LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR courier LIKE CONCAT('%', #{waybillNo}, '%'))
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        LIMIT #{shelf}, #{courier}
+    </select>
+
+    <select id="countPage" parameterType="com.huster.infrastructure.dao.po.PackagePO"
+            resultType="int">
+        SELECT COUNT(*) FROM package
+        <where>
+            <if test="phone != null and phone != ''">
+                AND phone = #{phone}
+            </if>
+            <if test="waybillNo != null and waybillNo != ''">
+                AND (waybill_no LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR phone LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR courier LIKE CONCAT('%', #{waybillNo}, '%'))
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="countTodayCheckin" resultType="int">
+        SELECT COUNT(*) FROM package
+        WHERE DATE(checkin_time) = CURDATE()
+    </select>
+
+    <select id="countPending" resultType="int">
+        SELECT COUNT(*) FROM package WHERE status = 0
+    </select>
+
+    <select id="countStale" resultType="int">
+        SELECT COUNT(*) FROM package
+        WHERE status = 0 AND checkin_time &lt; DATE_SUB(NOW(), INTERVAL 48 HOUR)
+    </select>
+
+    <select id="countTodayPickup" resultType="int">
+        SELECT COUNT(*) FROM package
+        WHERE DATE(pickup_time) = CURDATE()
+    </select>
+
+    <update id="updatePickup" parameterType="string">
+        UPDATE package SET status = 1, pickup_time = NOW()
+        WHERE biz_id = #{bizId} AND status = 0
+    </update>
+
+    <update id="updateInfo" parameterType="com.huster.infrastructure.dao.po.PackagePO">
+        UPDATE package
+        SET waybill_no = #{waybillNo},
+            phone = #{phone},
+            courier = #{courier},
+            shelf = #{shelf}
+        WHERE biz_id = #{bizId} AND status = 0
+    </update>
+
+</mapper>
