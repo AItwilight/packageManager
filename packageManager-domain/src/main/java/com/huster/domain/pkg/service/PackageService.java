@@ -7,11 +7,13 @@ import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
 import com.huster.types.enums.ResponseCode;
 import com.huster.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Slf4j
+@Service
 public class PackageService implements IPackageService {
 
     @Resource
