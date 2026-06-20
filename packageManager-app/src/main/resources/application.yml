@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: packageManager-app
+  profiles:
+    active: dev
