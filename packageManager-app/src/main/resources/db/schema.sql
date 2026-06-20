@@ -34,4 +34,4 @@ CREATE TABLE IF NOT EXISTS sys_user (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统用户表';
 
 -- 初始化管理员: admin / admin123
-INSERT INTO sys_user (username, password) VALUES ('admin', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iAt6Z5Eh');
+INSERT INTO sys_user (username, password) VALUES ('admin', '$2a$10$IH2zGFqSObWXNUX7yvdkdey92XBCc3AbxkX.FpYZKjaXilNmWqIhW');
