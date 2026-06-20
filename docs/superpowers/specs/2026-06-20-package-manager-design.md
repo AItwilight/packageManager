@@ -102,7 +102,7 @@ app ──→ trigger ──→ domain ←── infrastructure
 ### 2.4 限界上下文 `package` 内部结构
 
 ```
-domain/package/
+domain/pkg/
 ├── adapter/
 │   └── repository/
 │       └── IPackageRepository.java      ← 仓储接口（只接受/返回领域对象）

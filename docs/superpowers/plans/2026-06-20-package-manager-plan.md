@@ -287,18 +287,18 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 3: Domain Layer — PackageStatusEnum and CourierCompanyEnum
 
 **Files:**
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/model/valobj/PackageStatusEnum.java`
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/model/valobj/CourierCompanyEnum.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/model/valobj/PackageStatusEnum.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/model/valobj/CourierCompanyEnum.java`
 
 **Interfaces:**
 - Produces: `PackageStatusEnum` (PENDING(0), PICKED_UP(1)), `CourierCompanyEnum` (SF, YTO, ZTO, STO, YD, JD, DB, OTHER)
 
 - [ ] **Step 1: Create PackageStatusEnum**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/model/valobj/PackageStatusEnum.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/model/valobj/PackageStatusEnum.java`:
 
 ```java
-package com.huster.domain.package.model.valobj;
+package com.huster.domain.pkg.model.valobj;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -326,10 +326,10 @@ public enum PackageStatusEnum {
 
 - [ ] **Step 2: Create CourierCompanyEnum**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/model/valobj/CourierCompanyEnum.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/model/valobj/CourierCompanyEnum.java`:
 
 ```java
-package com.huster.domain.package.model.valobj;
+package com.huster.domain.pkg.model.valobj;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -372,7 +372,7 @@ Expected: BUILD SUCCESS
 - [ ] **Step 4: Commit**
 
 ```bash
-cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/package/ && git commit -m "feat: add PackageStatusEnum and CourierCompanyEnum
+cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/pkg/ && git commit -m "feat: add PackageStatusEnum and CourierCompanyEnum
 
 - PENDING(0), PICKED_UP(1) status enum
 - 8 courier company codes (SF,YTO,ZTO,STO,YD,JD,DB,OTHER)
@@ -385,8 +385,8 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 4: Domain Layer — PackageEntity and PackageAggregate
 
 **Files:**
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/model/entity/PackageEntity.java`
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/model/aggregate/PackageAggregate.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/model/entity/PackageEntity.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/model/aggregate/PackageAggregate.java`
 
 **Interfaces:**
 - Consumes: `PackageStatusEnum`, `CourierCompanyEnum` (Task 3)
@@ -394,13 +394,13 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 - [ ] **Step 1: Create PackageEntity**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/model/entity/PackageEntity.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/model/entity/PackageEntity.java`:
 
 ```java
-package com.huster.domain.package.model.entity;
+package com.huster.domain.pkg.model.entity;
 
-import com.huster.domain.package.model.valobj.CourierCompanyEnum;
-import com.huster.domain.package.model.valobj.PackageStatusEnum;
+import com.huster.domain.pkg.model.valobj.CourierCompanyEnum;
+import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -440,14 +440,14 @@ public class PackageEntity {
 
 - [ ] **Step 2: Create PackageAggregate**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/model/aggregate/PackageAggregate.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/model/aggregate/PackageAggregate.java`:
 
 ```java
-package com.huster.domain.package.model.aggregate;
+package com.huster.domain.pkg.model.aggregate;
 
-import com.huster.domain.package.model.entity.PackageEntity;
-import com.huster.domain.package.model.valobj.CourierCompanyEnum;
-import com.huster.domain.package.model.valobj.PackageStatusEnum;
+import com.huster.domain.pkg.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.valobj.CourierCompanyEnum;
+import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -493,7 +493,7 @@ Expected: BUILD SUCCESS
 - [ ] **Step 4: Commit**
 
 ```bash
-cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/package/model/entity/PackageEntity.java packageManager-domain/src/main/java/com/huster/domain/package/model/aggregate/PackageAggregate.java && git commit -m "feat: add PackageEntity and PackageAggregate domain models
+cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/pkg/model/entity/PackageEntity.java packageManager-domain/src/main/java/com/huster/domain/pkg/model/aggregate/PackageAggregate.java && git commit -m "feat: add PackageEntity and PackageAggregate domain models
 
 - PackageEntity with isStale() method (48h threshold)
 - PackageAggregate with createForCheckin() static factory
@@ -506,7 +506,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 5: Domain Layer — IPackageRepository Interface
 
 **Files:**
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/adapter/repository/IPackageRepository.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/adapter/repository/IPackageRepository.java`
 
 **Interfaces:**
 - Consumes: `PackageEntity` (Task 4), `PackageAggregate` (Task 4)
@@ -514,13 +514,13 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 - [ ] **Step 1: Create IPackageRepository**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/adapter/repository/IPackageRepository.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/adapter/repository/IPackageRepository.java`:
 
 ```java
-package com.huster.domain.package.adapter.repository;
+package com.huster.domain.pkg.adapter.repository;
 
-import com.huster.domain.package.model.aggregate.PackageAggregate;
-import com.huster.domain.package.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.aggregate.PackageAggregate;
+import com.huster.domain.pkg.model.entity.PackageEntity;
 
 import java.util.List;
 
@@ -572,7 +572,7 @@ Expected: BUILD SUCCESS
 - [ ] **Step 3: Commit**
 
 ```bash
-cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/package/adapter/repository/IPackageRepository.java && git commit -m "feat: add IPackageRepository domain interface
+cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/pkg/adapter/repository/IPackageRepository.java && git commit -m "feat: add IPackageRepository domain interface
 
 - Query methods: byBizId, byWaybillNo, page, count
 - Stats methods: todayCheckin, pending, stale, todayPickup
@@ -586,8 +586,8 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 6: Domain Layer — PackageService
 
 **Files:**
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/service/IPackageService.java`
-- Create: `packageManager-domain/src/main/java/com/huster/domain/package/service/PackageService.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/service/IPackageService.java`
+- Create: `packageManager-domain/src/main/java/com/huster/domain/pkg/service/PackageService.java`
 
 **Interfaces:**
 - Consumes: `IPackageRepository` (Task 5), `PackageEntity`, `PackageAggregate`, `PackageStatusEnum`, `CourierCompanyEnum` (Tasks 3-4)
@@ -595,13 +595,13 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 - [ ] **Step 1: Create IPackageService**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/service/IPackageService.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/service/IPackageService.java`:
 
 ```java
-package com.huster.domain.package.service;
+package com.huster.domain.pkg.service;
 
-import com.huster.domain.package.model.aggregate.PackageAggregate;
-import com.huster.domain.package.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.aggregate.PackageAggregate;
+import com.huster.domain.pkg.model.entity.PackageEntity;
 
 import java.util.List;
 
@@ -617,15 +617,15 @@ public interface IPackageService {
 
 - [ ] **Step 2: Create PackageService**
 
-Create file `packageManager-domain/src/main/java/com/huster/domain/package/service/PackageService.java`:
+Create file `packageManager-domain/src/main/java/com/huster/domain/pkg/service/PackageService.java`:
 
 ```java
-package com.huster.domain.package.service;
+package com.huster.domain.pkg.service;
 
-import com.huster.domain.package.adapter.repository.IPackageRepository;
-import com.huster.domain.package.model.aggregate.PackageAggregate;
-import com.huster.domain.package.model.entity.PackageEntity;
-import com.huster.domain.package.model.valobj.PackageStatusEnum;
+import com.huster.domain.pkg.adapter.repository.IPackageRepository;
+import com.huster.domain.pkg.model.aggregate.PackageAggregate;
+import com.huster.domain.pkg.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
 import com.huster.types.enums.ResponseCode;
 import com.huster.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -717,7 +717,7 @@ Expected: BUILD SUCCESS
 - [ ] **Step 4: Commit**
 
 ```bash
-cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/package/service/ && git commit -m "feat: add PackageService domain service
+cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/pkg/service/ && git commit -m "feat: add PackageService domain service
 
 - checkin with waybill duplicate check
 - pickup with status validation
@@ -1095,11 +1095,11 @@ Create file `packageManager-infrastructure/src/main/java/com/huster/infrastructu
 ```java
 package com.huster.infrastructure.adapter.repository;
 
-import com.huster.domain.package.adapter.repository.IPackageRepository;
-import com.huster.domain.package.model.aggregate.PackageAggregate;
-import com.huster.domain.package.model.entity.PackageEntity;
-import com.huster.domain.package.model.valobj.CourierCompanyEnum;
-import com.huster.domain.package.model.valobj.PackageStatusEnum;
+import com.huster.domain.pkg.adapter.repository.IPackageRepository;
+import com.huster.domain.pkg.model.aggregate.PackageAggregate;
+import com.huster.domain.pkg.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.valobj.CourierCompanyEnum;
+import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
 import com.huster.infrastructure.dao.IPackageDao;
 import com.huster.infrastructure.dao.po.PackagePO;
 import com.huster.types.enums.ResponseCode;
@@ -1619,11 +1619,11 @@ import com.huster.api.dto.DashboardStatsResponseDTO;
 import com.huster.api.dto.EditRequestDTO;
 import com.huster.api.dto.PackageResponseDTO;
 import com.huster.api.response.Response;
-import com.huster.domain.package.model.aggregate.PackageAggregate;
-import com.huster.domain.package.model.entity.PackageEntity;
-import com.huster.domain.package.model.valobj.CourierCompanyEnum;
-import com.huster.domain.package.model.valobj.PackageStatusEnum;
-import com.huster.domain.package.service.IPackageService;
+import com.huster.domain.pkg.model.aggregate.PackageAggregate;
+import com.huster.domain.pkg.model.entity.PackageEntity;
+import com.huster.domain.pkg.model.valobj.CourierCompanyEnum;
+import com.huster.domain.pkg.model.valobj.PackageStatusEnum;
+import com.huster.domain.pkg.service.IPackageService;
 import com.huster.types.enums.ResponseCode;
 import com.huster.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -1935,7 +1935,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 ### Task 15: Backend — PackageService Spring Bean Registration Fix
 
 **Files:**
-- Modify: `packageManager-domain/src/main/java/com/huster/domain/package/service/PackageService.java`
+- Modify: `packageManager-domain/src/main/java/com/huster/domain/pkg/service/PackageService.java`
 
 **Interfaces:**
 - Consumes: `IPackageService`, `IPackageRepository` (Task 5-6)
@@ -1946,7 +1946,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 The current `PackageService` is missing the `@Service` annotation (per DDD standard, domain services use `@Service`). Add it:
 
 ```java
-package com.huster.domain.package.service;
+package com.huster.domain.pkg.service;
 
 // ... existing imports ...
 import org.springframework.stereotype.Service;
@@ -1969,7 +1969,7 @@ Expected: BUILD SUCCESS
 - [ ] **Step 3: Commit**
 
 ```bash
-cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/package/service/PackageService.java && git commit -m "fix: add @Service annotation to PackageService
+cd e:/project/packageManager && git add packageManager-domain/src/main/java/com/huster/domain/pkg/service/PackageService.java && git commit -m "fix: add @Service annotation to PackageService
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
