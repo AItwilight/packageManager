@@ -3,11 +3,19 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### JVM ###
+hs_err_pid*.log
+replay_pid*.log
+
+### Application data & logs ###
+data/
+**/data/log/*.log
+
+### Maven wrapper local config ###
+.mvn/jvm.config
+
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+.idea/
 *.iws
 *.iml
 *.ipr
@@ -34,5 +42,19 @@ build/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
-.DS_Store.claude/worktrees/
+### Claude ###
+.claude/
+
+### Superpowers ###
+.superpowers/
+
+### Node ###
+node_modules/
+dist/
+
+### OS ###
+.DS_Store
+
+# 忽略这两个已提交过的文档目录
+docs/ddd-development-manual/
+docs/superpowers/
