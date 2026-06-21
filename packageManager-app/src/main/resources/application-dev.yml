@@ -43,6 +43,8 @@ mybatis:
 
 # 日志
 logging:
+  file:
+    path: ./logs
   charset:
     console: UTF-8
     file: UTF-8
