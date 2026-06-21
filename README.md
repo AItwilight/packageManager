@@ -260,15 +260,6 @@ packageManager/
 | E0205 | 货架格式无效（应为 大写字母-两位数字，如 A-13） |
 | E0206 | 当日流水号超限（最大 9999） |
 
-## Docker 部署
-
-```bash
-# 构建镜像
-docker build -t system/packageManager:1.0-SNAPSHOT -f packageManager-app/Dockerfile .
-
-# 启动应用
-docker-compose -f docs/dev-ops/docker-compose-app.yml up -d
-```
 
 ## License
 
