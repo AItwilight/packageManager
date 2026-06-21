@@ -10,7 +10,8 @@ import java.util.Map;
 
 public interface IPackageManageService {
     Response<Map<String, String>> checkin(CheckinRequestDTO request);
-    Response<Map<String, Object>> list(String phone, String keyword, Integer status, Integer page, Integer size);
+    Response<Map<String, Object>> list(String phone, String keyword, Integer status,
+                                        Boolean stale, String sortOrder, Integer page, Integer size);
     Response<Void> pickup(String id);
     Response<Void> edit(EditRequestDTO request);
     Response<DashboardStatsResponseDTO> stats();

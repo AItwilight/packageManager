@@ -253,13 +253,14 @@ public class ApiTest {
         // 1. 批量随机入库
         for (int i = 0; i < TOTAL; i++) {
             CheckinRequestDTO req = new CheckinRequestDTO();
+            String currentCourier = COURIERS[rnd.nextInt(COURIERS.length)];
             // 随机运单号（防重复）
-            req.setWaybillNo("TEST" + System.currentTimeMillis()
+            req.setWaybillNo(currentCourier + System.currentTimeMillis()
                     + String.format("%04d", rnd.nextInt(10000)));
             // 随机手机号
             req.setPhone("1" + String.format("%010d", rnd.nextLong(10000000000L)));
             // 随机快递公司
-            req.setCourier(COURIERS[rnd.nextInt(COURIERS.length)]);
+            req.setCourier(currentCourier);
             // 随机货架：A-01 ~ H-99
             char zone = (char) ('A' + rnd.nextInt(8));
             req.setShelf(String.format("%c-%02d", zone, rnd.nextInt(1, 100)));

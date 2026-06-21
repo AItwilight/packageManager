@@ -15,7 +15,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="货架位置" prop="shelf">
-          <el-input v-model="form.shelf" placeholder="如 A-01" />
+          <el-input v-model="form.shelf" placeholder="大写字母-两位数字，如 A-13" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :loading="loading" @click="handleCheckin">
@@ -63,6 +63,14 @@ const validatePhone = (_rule: any, value: string, callback: any) => {
   }
 }
 
+const validateShelf = (_rule: any, value: string, callback: any) => {
+  if (!/^[A-Z]-\d{2}$/.test(value)) {
+    callback(new Error('货架格式：大写字母-两位数字，如 A-13'))
+  } else {
+    callback()
+  }
+}
+
 const rules: FormRules = {
   waybillNo: [{ required: true, message: '请输入运单号', trigger: 'blur' }],
   phone: [
@@ -70,8 +78,13 @@ const rules: FormRules = {
     { validator: validatePhone, trigger: 'blur' },
   ],
   courier: [{ required: true, message: '请选择快递公司', trigger: 'change' }],
-  shelf: [{ required: true, message: '请输入货架位置', trigger: 'blur' }],
+  shelf: [
+    { required: true, message: '请输入货架位置', trigger: 'blur' },
+    { validator: validateShelf, trigger: 'blur' },
+  ],
 }
+
+const lastPickupCode = ref('')
 
 async function handleCheckin() {
   const valid = await formRef.value?.validate().catch(() => false)
@@ -79,8 +92,9 @@ async function handleCheckin() {
 
   loading.value = true
   try {
-    await request.post('/package/checkin', { ...form })
-    ElMessage.success('入库成功')
+    const data: any = await request.post('/package/checkin', { ...form })
+    lastPickupCode.value = data.pickupCode
+    ElMessage.success('入库成功，取件码：' + data.pickupCode)
     handleReset()
   } catch {
     // 错误已在拦截器中处理
@@ -91,6 +105,7 @@ async function handleCheckin() {
 
 function handleReset() {
   formRef.value?.resetFields()
+  lastPickupCode.value = ''
 }
 </script>
 

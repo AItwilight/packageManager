@@ -5194,3 +5194,853 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'package_manager.package' doe
 26-06-21.16:52:27.753 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
 26-06-21.16:52:35.826 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
 26-06-21.16:52:35.834 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.17:03:42.716 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 1724 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.17:03:42.718 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.17:03:42.718 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.17:03:43.680 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.17:03:43.686 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.17:03:43.687 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.17:03:43.687 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.17:03:43.833 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.17:03:43.833 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1082 ms
+26-06-21.17:03:44.594 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.17:03:44.619 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.17:03:44.633 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.17:03:44.646 [main            ] INFO  Application            - Started Application in 2.342 seconds (JVM running for 3.286)
+26-06-21.17:03:45.418 [RMI TCP Connection(1)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.17:03:45.419 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.17:03:45.426 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 7 ms
+26-06-21.17:03:45.426 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.17:03:45.560 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.17:03:57.858 [http-nio-8091-exec-1] INFO  PackageController      - 查询统计概览
+26-06-21.17:03:57.872 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.17:03:57.886 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.17:03:57.899 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.17:03:57.900 [http-nio-8091-exec-1] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.17:03:57.900 [http-nio-8091-exec-1] DEBUG countPending           - ==> Parameters: 
+26-06-21.17:03:57.901 [http-nio-8091-exec-1] DEBUG countPending           - <==      Total: 1
+26-06-21.17:03:57.901 [http-nio-8091-exec-1] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.17:03:57.901 [http-nio-8091-exec-1] DEBUG countStale             - ==> Parameters: 
+26-06-21.17:03:57.901 [http-nio-8091-exec-1] DEBUG countStale             - <==      Total: 1
+26-06-21.17:03:57.902 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.17:03:57.902 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.17:03:57.902 [http-nio-8091-exec-1] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.17:04:02.980 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.17:04:02.994 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:02.995 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.17:04:03.005 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:04:03.011 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:03.011 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:03.012 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:23.081 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=2, size=20
+26-06-21.17:04:23.082 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:23.083 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 0(Integer), 20(Integer), 20(Integer)
+26-06-21.17:04:23.086 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:04:23.087 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:23.087 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:23.088 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:36.296 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=3, size=20
+26-06-21.17:04:36.297 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:36.297 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 0(Integer), 40(Integer), 20(Integer)
+26-06-21.17:04:36.300 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:04:36.301 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:36.301 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:36.302 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:40.979 [http-nio-8091-exec-2] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=4, size=20
+26-06-21.17:04:40.980 [http-nio-8091-exec-2] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:40.980 [http-nio-8091-exec-2] DEBUG queryPage              - ==> Parameters: 0(Integer), 60(Integer), 20(Integer)
+26-06-21.17:04:40.982 [http-nio-8091-exec-2] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:04:40.983 [http-nio-8091-exec-2] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:40.984 [http-nio-8091-exec-2] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:40.984 [http-nio-8091-exec-2] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:41.977 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=5, size=20
+26-06-21.17:04:41.978 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:41.979 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 80(Integer), 20(Integer)
+26-06-21.17:04:41.981 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 19
+26-06-21.17:04:41.982 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:41.982 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:41.983 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:49.922 [http-nio-8091-exec-3] INFO  PackageController      - 查询统计概览
+26-06-21.17:04:49.923 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.17:04:49.923 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.17:04:49.923 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.17:04:49.924 [http-nio-8091-exec-3] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.17:04:49.924 [http-nio-8091-exec-3] DEBUG countPending           - ==> Parameters: 
+26-06-21.17:04:49.925 [http-nio-8091-exec-3] DEBUG countPending           - <==      Total: 1
+26-06-21.17:04:49.926 [http-nio-8091-exec-3] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.17:04:49.926 [http-nio-8091-exec-3] DEBUG countStale             - ==> Parameters: 
+26-06-21.17:04:49.926 [http-nio-8091-exec-3] DEBUG countStale             - <==      Total: 1
+26-06-21.17:04:49.927 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.17:04:49.927 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.17:04:49.927 [http-nio-8091-exec-3] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.17:04:50.828 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.17:04:50.828 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:04:50.828 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.17:04:50.831 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:04:50.832 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:04:50.832 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:04:50.833 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.17:04:59.993 [http-nio-8091-exec-10] INFO  PackageController      - 查询统计概览
+26-06-21.17:04:59.995 [http-nio-8091-exec-10] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.17:04:59.995 [http-nio-8091-exec-10] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.17:04:59.996 [http-nio-8091-exec-10] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.17:04:59.997 [http-nio-8091-exec-10] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.17:04:59.997 [http-nio-8091-exec-10] DEBUG countPending           - ==> Parameters: 
+26-06-21.17:04:59.997 [http-nio-8091-exec-10] DEBUG countPending           - <==      Total: 1
+26-06-21.17:04:59.998 [http-nio-8091-exec-10] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.17:04:59.998 [http-nio-8091-exec-10] DEBUG countStale             - ==> Parameters: 
+26-06-21.17:04:59.998 [http-nio-8091-exec-10] DEBUG countStale             - <==      Total: 1
+26-06-21.17:04:59.998 [http-nio-8091-exec-10] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.17:04:59.998 [http-nio-8091-exec-10] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.17:04:59.999 [http-nio-8091-exec-10] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.17:05:17.436 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.17:05:17.437 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:05:17.438 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.17:05:17.441 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:05:17.442 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:05:17.442 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:05:17.444 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.17:12:03.138 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.17:12:03.139 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.17:12:03.143 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.17:12:03.150 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 20
+26-06-21.17:12:03.151 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.17:12:03.152 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.17:12:03.152 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.18:26:22.722 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.18:26:22.725 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.18:26:22.727 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.18:26:22.735 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.18:26:22.737 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.18:26:22.738 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.18:26:22.739 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.18:26:24.759 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, page=1, size=20
+26-06-21.18:26:24.761 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.18:26:24.761 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.18:26:24.763 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 2
+26-06-21.18:26:24.763 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.18:26:24.763 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.18:26:24.764 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.18:26:25.479 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, page=1, size=20
+26-06-21.18:26:25.479 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY create_time DESC LIMIT ?, ?
+26-06-21.18:26:25.479 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.18:26:25.481 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 20
+26-06-21.18:26:25.481 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.18:26:25.481 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.18:26:25.482 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.18:26:47.955 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.18:26:47.963 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.18:27:01.132 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 23688 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.18:27:01.140 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.18:27:01.141 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.18:27:02.394 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.18:27:02.401 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.18:27:02.401 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.18:27:02.401 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.18:27:02.564 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.18:27:02.564 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1364 ms
+26-06-21.18:27:03.313 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.18:27:03.337 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.18:27:03.350 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.18:27:03.362 [main            ] INFO  Application            - Started Application in 2.835 seconds (JVM running for 5.522)
+26-06-21.18:27:03.895 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.18:27:03.898 [RMI TCP Connection(1)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.18:27:03.899 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.18:27:03.900 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-06-21.18:27:04.051 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.18:28:16.554 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.18:28:16.558 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.21:25:30.749 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 22448 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.21:25:30.751 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.21:25:30.751 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.21:25:32.267 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.21:25:32.275 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.21:25:32.276 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.21:25:32.276 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.21:25:32.556 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.21:25:32.556 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1767 ms
+26-06-21.21:25:33.491 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.21:25:33.516 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.21:25:33.538 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.21:25:33.553 [main            ] INFO  Application            - Started Application in 3.414 seconds (JVM running for 5.043)
+26-06-21.21:25:34.619 [RMI TCP Connection(2)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.21:25:34.620 [RMI TCP Connection(2)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.21:25:34.621 [RMI TCP Connection(2)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-06-21.21:25:34.671 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.21:25:34.998 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.21:40:01.683 [http-nio-8091-exec-1] INFO  PackageController      - 查询统计概览
+26-06-21.21:40:01.711 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:40:01.743 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:40:01.857 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:40:01.860 [http-nio-8091-exec-1] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:40:01.861 [http-nio-8091-exec-1] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:40:01.867 [http-nio-8091-exec-1] DEBUG countPending           - <==      Total: 1
+26-06-21.21:40:01.868 [http-nio-8091-exec-1] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:40:01.868 [http-nio-8091-exec-1] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:40:01.874 [http-nio-8091-exec-1] DEBUG countStale             - <==      Total: 1
+26-06-21.21:40:01.875 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:40:01.875 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:40:01.876 [http-nio-8091-exec-1] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:40:35.862 [http-nio-8091-exec-2] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:40:35.894 [http-nio-8091-exec-2] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:40:35.895 [http-nio-8091-exec-2] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:40:35.911 [http-nio-8091-exec-2] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:40:35.923 [http-nio-8091-exec-2] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:40:35.924 [http-nio-8091-exec-2] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:40:35.925 [http-nio-8091-exec-2] DEBUG countPage              - <==      Total: 1
+26-06-21.21:40:37.307 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=desc, page=1, size=20
+26-06-21.21:40:37.309 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:40:37.309 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:40:37.311 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 5
+26-06-21.21:40:37.311 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:40:37.312 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:40:37.313 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:40:46.844 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:40:46.844 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:40:46.845 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:40:46.848 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 2
+26-06-21.21:40:46.849 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:40:46.849 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:40:46.850 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:40:48.684 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:40:48.685 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:40:48.685 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:40:48.689 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:40:48.689 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:40:48.689 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:40:48.691 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.21:40:51.960 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=2, size=20
+26-06-21.21:40:51.961 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:40:51.961 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 20(Integer), 20(Integer)
+26-06-21.21:40:51.965 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:40:51.966 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:40:51.966 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:40:51.966 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:13.537 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:41:13.538 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:41:13.538 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:13.539 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 2
+26-06-21.21:41:13.540 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:13.540 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:41:13.542 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:25.143 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=8622, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:41:25.143 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:41:25.144 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 8622(String), 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:25.147 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 1
+26-06-21.21:41:25.148 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.21:41:25.148 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 8622(String), 1(Integer)
+26-06-21.21:41:25.148 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:27.112 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=8622, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:41:27.112 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:41:27.113 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 8622(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:27.117 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 0
+26-06-21.21:41:27.118 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.21:41:27.118 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 8622(String), 0(Integer)
+26-06-21.21:41:27.118 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:28.932 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=8622, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:41:28.934 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:41:28.934 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 8622(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:28.934 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 0
+26-06-21.21:41:28.935 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.21:41:28.935 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 8622(String), 0(Integer)
+26-06-21.21:41:28.935 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:34.448 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:41:34.450 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:41:34.451 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:34.455 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:41:34.455 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:34.455 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:34.456 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:38.919 [http-nio-8091-exec-2] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:41:38.920 [http-nio-8091-exec-2] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:38.920 [http-nio-8091-exec-2] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:38.922 [http-nio-8091-exec-2] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:41:38.923 [http-nio-8091-exec-2] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:38.923 [http-nio-8091-exec-2] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:38.925 [http-nio-8091-exec-2] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:44.984 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:41:44.985 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:44.985 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:44.986 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 2
+26-06-21.21:41:44.986 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:44.986 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:41:44.987 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:45.942 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:41:45.943 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:45.943 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:45.951 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:41:45.952 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:45.952 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:45.953 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:48.413 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=4, size=20
+26-06-21.21:41:48.414 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:48.414 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 60(Integer), 20(Integer)
+26-06-21.21:41:48.416 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:41:48.417 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:48.418 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:48.418 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:49.269 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=5, size=20
+26-06-21.21:41:49.270 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:49.270 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 80(Integer), 20(Integer)
+26-06-21.21:41:49.272 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 19
+26-06-21.21:41:49.273 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:49.273 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:49.274 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:41:53.197 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:41:53.199 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:41:53.199 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:41:53.202 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:41:53.203 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:41:53.203 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:41:53.203 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:04.547 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:42:04.547 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:42:04.547 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:04.549 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:04.549 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:04.549 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:04.550 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:05.251 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:42:05.252 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:42:05.252 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:05.253 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:05.254 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:05.254 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:05.254 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:05.787 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:42:05.788 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:42:05.788 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:05.789 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:05.790 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:05.790 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:05.791 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:06.419 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:42:06.420 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:42:06.420 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:06.421 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:06.422 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:06.422 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:06.423 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:06.771 [http-nio-8091-exec-2] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.21:42:06.772 [http-nio-8091-exec-2] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.21:42:06.772 [http-nio-8091-exec-2] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:06.773 [http-nio-8091-exec-2] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:06.774 [http-nio-8091-exec-2] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:06.774 [http-nio-8091-exec-2] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:06.775 [http-nio-8091-exec-2] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:09.180 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:42:09.181 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:42:09.181 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:09.183 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:09.183 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:09.183 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:09.184 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:12.684 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=9911, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:42:12.685 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:42:12.686 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 9911(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:12.687 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 1
+26-06-21.21:42:12.688 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.21:42:12.688 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 9911(String), 0(Integer)
+26-06-21.21:42:12.689 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:23.651 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:42:23.652 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:42:23.652 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:23.654 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:23.654 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:23.655 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:23.655 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:26.835 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=10434099911, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:42:26.836 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:42:26.836 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 10434099911(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:26.837 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 0
+26-06-21.21:42:26.837 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.21:42:26.837 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 10434099911(String), 0(Integer)
+26-06-21.21:42:26.838 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:42:33.145 [http-nio-8091-exec-7] INFO  PackageController      - 查询统计概览
+26-06-21.21:42:33.146 [http-nio-8091-exec-7] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:42:33.146 [http-nio-8091-exec-7] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:42:33.146 [http-nio-8091-exec-7] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:42:33.147 [http-nio-8091-exec-7] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:42:33.147 [http-nio-8091-exec-7] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:42:33.148 [http-nio-8091-exec-7] DEBUG countPending           - <==      Total: 1
+26-06-21.21:42:33.148 [http-nio-8091-exec-7] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:42:33.148 [http-nio-8091-exec-7] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:42:33.149 [http-nio-8091-exec-7] DEBUG countStale             - <==      Total: 1
+26-06-21.21:42:33.149 [http-nio-8091-exec-7] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:42:33.149 [http-nio-8091-exec-7] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:42:33.149 [http-nio-8091-exec-7] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:42:43.907 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:42:43.908 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:42:43.908 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:42:43.910 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:42:43.910 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:42:43.910 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:42:43.911 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:43:45.218 [http-nio-8091-exec-9] INFO  PackageController      - 包裹入库: {"courier":"SF","phone":"12691465963","shelf":"C-36","waybillNo":"SF1235264655154545"}
+26-06-21.21:43:45.224 [http-nio-8091-exec-9] DEBUG queryByWaybillNoAndStatus - ==>  Preparing: SELECT * FROM package WHERE waybill_no = ? AND status = ? LIMIT 1
+26-06-21.21:43:45.225 [http-nio-8091-exec-9] DEBUG queryByWaybillNoAndStatus - ==> Parameters: SF1235264655154545(String), 0(Integer)
+26-06-21.21:43:45.227 [http-nio-8091-exec-9] DEBUG queryByWaybillNoAndStatus - <==      Total: 0
+26-06-21.21:43:45.276 [http-nio-8091-exec-9] DEBUG insert                 - ==>  Preparing: INSERT INTO package (biz_id, waybill_no, phone, courier, shelf, status, checkin_time, pickup_code, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+26-06-21.21:43:45.278 [http-nio-8091-exec-9] DEBUG insert                 - ==> Parameters: 05ed44922f1442deb1e899d6(String), SF1235264655154545(String), 12691465963(String), SF(String), C-36(String), 0(Integer), 2026-06-21 21:43:45.224(Timestamp), C-36-0102(String), 1(Long)
+26-06-21.21:43:45.282 [http-nio-8091-exec-9] DEBUG insert                 - <==    Updates: 1
+26-06-21.21:43:48.336 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:43:48.338 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:43:48.339 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:43:48.345 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:43:48.346 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:43:48.346 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:43:48.347 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.21:43:57.911 [http-nio-8091-exec-1] INFO  PackageController      - 确认取件: id=831d65d3434549e1ae98b774
+26-06-21.21:43:57.911 [http-nio-8091-exec-1] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.21:43:57.912 [http-nio-8091-exec-1] DEBUG queryByBizId           - ==> Parameters: 831d65d3434549e1ae98b774(String)
+26-06-21.21:43:57.912 [http-nio-8091-exec-1] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.21:43:57.913 [http-nio-8091-exec-1] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.21:43:57.913 [http-nio-8091-exec-1] DEBUG updatePickup           - ==> Parameters: 831d65d3434549e1ae98b774(String)
+26-06-21.21:43:57.915 [http-nio-8091-exec-1] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.21:43:57.936 [http-nio-8091-exec-2] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:43:57.936 [http-nio-8091-exec-2] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:43:57.936 [http-nio-8091-exec-2] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:43:57.937 [http-nio-8091-exec-2] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:43:57.938 [http-nio-8091-exec-2] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:43:57.938 [http-nio-8091-exec-2] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:43:57.939 [http-nio-8091-exec-2] DEBUG countPage              - <==      Total: 1
+26-06-21.21:43:59.983 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:43:59.984 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:43:59.985 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:43:59.986 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 3
+26-06-21.21:43:59.988 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:43:59.988 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:43:59.989 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:44:01.788 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:44:01.789 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:44:01.789 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:44:01.790 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:44:01.790 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:44:01.790 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:44:01.790 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:44:04.471 [http-nio-8091-exec-6] INFO  PackageController      - 确认取件: id=7efe1241f2b7478baaa00cde
+26-06-21.21:44:04.472 [http-nio-8091-exec-6] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.21:44:04.472 [http-nio-8091-exec-6] DEBUG queryByBizId           - ==> Parameters: 7efe1241f2b7478baaa00cde(String)
+26-06-21.21:44:04.472 [http-nio-8091-exec-6] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.21:44:04.473 [http-nio-8091-exec-6] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.21:44:04.473 [http-nio-8091-exec-6] DEBUG updatePickup           - ==> Parameters: 7efe1241f2b7478baaa00cde(String)
+26-06-21.21:44:04.474 [http-nio-8091-exec-6] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.21:44:04.487 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:44:04.488 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:44:04.488 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:44:04.489 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:44:04.489 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:44:04.489 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:44:04.490 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:45:22.288 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.21:45:22.300 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.21:46:01.818 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 6700 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.21:46:01.821 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.21:46:01.821 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.21:46:02.951 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.21:46:02.957 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.21:46:02.957 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.21:46:02.957 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.21:46:03.107 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.21:46:03.107 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1254 ms
+26-06-21.21:46:03.880 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.21:46:03.905 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.21:46:03.920 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.21:46:03.940 [main            ] INFO  Application            - Started Application in 2.643 seconds (JVM running for 3.787)
+26-06-21.21:46:04.402 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.21:46:04.666 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.21:46:06.000 [RMI TCP Connection(3)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.21:46:06.001 [RMI TCP Connection(3)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.21:46:06.002 [RMI TCP Connection(3)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-06-21.21:46:06.796 [http-nio-8091-exec-1] INFO  PackageController      - 查询统计概览
+26-06-21.21:46:06.814 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:46:06.831 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:46:06.849 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:46:06.850 [http-nio-8091-exec-1] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:46:06.850 [http-nio-8091-exec-1] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:46:06.851 [http-nio-8091-exec-1] DEBUG countPending           - <==      Total: 1
+26-06-21.21:46:06.852 [http-nio-8091-exec-1] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:46:06.852 [http-nio-8091-exec-1] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:46:06.852 [http-nio-8091-exec-1] DEBUG countStale             - <==      Total: 1
+26-06-21.21:46:06.853 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:46:06.853 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:46:06.854 [http-nio-8091-exec-1] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:46:09.720 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:46:09.735 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:46:09.735 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:46:09.746 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:46:09.750 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:46:09.750 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:46:09.751 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:46:10.476 [http-nio-8091-exec-3] INFO  PackageController      - 查询统计概览
+26-06-21.21:46:10.476 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:46:10.476 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:46:10.477 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:46:10.477 [http-nio-8091-exec-3] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:46:10.479 [http-nio-8091-exec-3] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:46:10.479 [http-nio-8091-exec-3] DEBUG countPending           - <==      Total: 1
+26-06-21.21:46:10.480 [http-nio-8091-exec-3] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:46:10.480 [http-nio-8091-exec-3] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:46:10.480 [http-nio-8091-exec-3] DEBUG countStale             - <==      Total: 1
+26-06-21.21:46:10.480 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:46:10.481 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:46:10.481 [http-nio-8091-exec-3] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:46:15.782 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:46:15.783 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:46:15.783 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:46:15.787 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:46:15.787 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:46:15.787 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:46:15.788 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:46:30.239 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:46:30.241 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:46:30.241 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:46:30.245 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:46:30.246 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:46:30.246 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:46:30.247 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:49:26.896 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.21:49:26.902 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.21:51:20.552 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 21048 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.21:51:20.554 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.21:51:20.554 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.21:51:21.530 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.21:51:21.536 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.21:51:21.536 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.21:51:21.536 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.21:51:21.679 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.21:51:21.679 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1097 ms
+26-06-21.21:51:22.467 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.21:51:22.501 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.21:51:22.515 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.21:51:22.531 [main            ] INFO  Application            - Started Application in 2.408 seconds (JVM running for 3.555)
+26-06-21.21:51:23.028 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.21:51:23.054 [RMI TCP Connection(2)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.21:51:23.054 [RMI TCP Connection(2)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.21:51:23.055 [RMI TCP Connection(2)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-06-21.21:51:23.217 [RMI TCP Connection(1)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.21:51:37.920 [http-nio-8091-exec-1] INFO  PackageController      - 查询统计概览
+26-06-21.21:51:37.936 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:51:37.952 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:51:37.978 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:51:37.979 [http-nio-8091-exec-1] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:51:37.979 [http-nio-8091-exec-1] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:51:37.980 [http-nio-8091-exec-1] DEBUG countPending           - <==      Total: 1
+26-06-21.21:51:37.980 [http-nio-8091-exec-1] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:51:37.980 [http-nio-8091-exec-1] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:51:37.981 [http-nio-8091-exec-1] DEBUG countStale             - <==      Total: 1
+26-06-21.21:51:37.981 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:51:37.981 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:51:37.982 [http-nio-8091-exec-1] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:51:38.579 [http-nio-8091-exec-2] INFO  PackageController      - 查询统计概览
+26-06-21.21:51:38.580 [http-nio-8091-exec-2] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:51:38.580 [http-nio-8091-exec-2] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:51:38.581 [http-nio-8091-exec-2] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:51:38.582 [http-nio-8091-exec-2] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:51:38.582 [http-nio-8091-exec-2] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:51:38.582 [http-nio-8091-exec-2] DEBUG countPending           - <==      Total: 1
+26-06-21.21:51:38.583 [http-nio-8091-exec-2] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:51:38.583 [http-nio-8091-exec-2] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:51:38.585 [http-nio-8091-exec-2] DEBUG countStale             - <==      Total: 1
+26-06-21.21:51:38.585 [http-nio-8091-exec-2] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:51:38.585 [http-nio-8091-exec-2] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:51:38.586 [http-nio-8091-exec-2] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:51:47.514 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:51:47.531 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:51:47.531 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:51:47.541 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:51:47.546 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:51:47.546 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:51:47.547 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:26.828 [http-nio-8091-exec-4] INFO  PackageController      - 包裹入库: {"courier":"SF","phone":"16532465921","shelf":"A-03","waybillNo":"SF12341234123412346"}
+26-06-21.21:53:26.832 [http-nio-8091-exec-4] DEBUG queryByWaybillNoAndStatus - ==>  Preparing: SELECT * FROM package WHERE waybill_no = ? AND status = ? LIMIT 1
+26-06-21.21:53:26.833 [http-nio-8091-exec-4] DEBUG queryByWaybillNoAndStatus - ==> Parameters: SF12341234123412346(String), 0(Integer)
+26-06-21.21:53:26.833 [http-nio-8091-exec-4] DEBUG queryByWaybillNoAndStatus - <==      Total: 0
+26-06-21.21:53:26.845 [http-nio-8091-exec-4] DEBUG insert                 - ==>  Preparing: INSERT INTO package (biz_id, waybill_no, phone, courier, shelf, status, checkin_time, pickup_code, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+26-06-21.21:53:26.846 [http-nio-8091-exec-4] DEBUG insert                 - ==> Parameters: 410d3848de6b424ab42600e3(String), SF12341234123412346(String), 16532465921(String), SF(String), A-03(String), 0(Integer), 2026-06-21 21:53:26.832(Timestamp), A-03-0603(String), 1(Long)
+26-06-21.21:53:26.848 [http-nio-8091-exec-4] DEBUG insert                 - <==    Updates: 1
+26-06-21.21:53:28.400 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:53:28.402 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:28.403 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:53:28.409 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:53:28.409 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:28.410 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:28.410 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:45.445 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=6, size=20
+26-06-21.21:53:45.447 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:45.448 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 100(Integer), 20(Integer)
+26-06-21.21:53:45.451 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:53:45.451 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:45.452 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:45.453 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:46.926 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=7, size=20
+26-06-21.21:53:46.928 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:46.928 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 0(Integer), 120(Integer), 20(Integer)
+26-06-21.21:53:46.932 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:53:46.935 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:46.935 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:46.937 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:47.530 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=9, size=20
+26-06-21.21:53:47.531 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:47.531 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 160(Integer), 20(Integer)
+26-06-21.21:53:47.535 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:53:47.536 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:47.536 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:47.536 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:48.155 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=16, size=20
+26-06-21.21:53:48.156 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:48.157 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 0(Integer), 300(Integer), 20(Integer)
+26-06-21.21:53:48.158 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 1
+26-06-21.21:53:48.158 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:48.158 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:48.159 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:52.284 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=15, size=20
+26-06-21.21:53:52.286 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:52.287 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 0(Integer), 280(Integer), 20(Integer)
+26-06-21.21:53:52.289 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:53:52.291 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:53:52.291 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:52.292 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.21:53:56.825 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=desc, page=1, size=20
+26-06-21.21:53:56.826 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:53:56.826 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:53:56.828 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 15
+26-06-21.21:53:56.828 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:53:56.828 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:53:56.829 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.21:54:01.923 [http-nio-8091-exec-2] INFO  PackageController      - 确认取件: id=2f208d02415b463186f85556
+26-06-21.21:54:01.924 [http-nio-8091-exec-2] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.21:54:01.924 [http-nio-8091-exec-2] DEBUG queryByBizId           - ==> Parameters: 2f208d02415b463186f85556(String)
+26-06-21.21:54:01.924 [http-nio-8091-exec-2] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.21:54:01.925 [http-nio-8091-exec-2] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.21:54:01.925 [http-nio-8091-exec-2] DEBUG updatePickup           - ==> Parameters: 2f208d02415b463186f85556(String)
+26-06-21.21:54:01.926 [http-nio-8091-exec-2] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.21:54:01.945 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=desc, page=1, size=20
+26-06-21.21:54:01.946 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:54:01.947 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:54:01.949 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 14
+26-06-21.21:54:01.951 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:54:01.951 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:54:01.952 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.21:54:04.037 [http-nio-8091-exec-4] INFO  PackageController      - 确认取件: id=48a655e0c90346a2acb443c1
+26-06-21.21:54:04.039 [http-nio-8091-exec-4] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.21:54:04.039 [http-nio-8091-exec-4] DEBUG queryByBizId           - ==> Parameters: 48a655e0c90346a2acb443c1(String)
+26-06-21.21:54:04.040 [http-nio-8091-exec-4] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.21:54:04.040 [http-nio-8091-exec-4] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.21:54:04.040 [http-nio-8091-exec-4] DEBUG updatePickup           - ==> Parameters: 48a655e0c90346a2acb443c1(String)
+26-06-21.21:54:04.041 [http-nio-8091-exec-4] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.21:54:04.055 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=desc, page=1, size=20
+26-06-21.21:54:04.056 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:54:04.056 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:54:04.058 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 13
+26-06-21.21:54:04.058 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:54:04.058 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:54:04.059 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.21:54:16.738 [http-nio-8091-exec-6] INFO  PackageController      - 查询统计概览
+26-06-21.21:54:16.739 [http-nio-8091-exec-6] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:54:16.740 [http-nio-8091-exec-6] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:54:16.741 [http-nio-8091-exec-6] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:54:16.741 [http-nio-8091-exec-6] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:54:16.741 [http-nio-8091-exec-6] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:54:16.741 [http-nio-8091-exec-6] DEBUG countPending           - <==      Total: 1
+26-06-21.21:54:16.742 [http-nio-8091-exec-6] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:54:16.742 [http-nio-8091-exec-6] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:54:16.743 [http-nio-8091-exec-6] DEBUG countStale             - <==      Total: 1
+26-06-21.21:54:16.743 [http-nio-8091-exec-6] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:54:16.744 [http-nio-8091-exec-6] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:54:16.744 [http-nio-8091-exec-6] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:54:20.755 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:54:20.756 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:54:20.756 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:54:20.759 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:54:20.760 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:54:20.760 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:54:20.761 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.21:54:30.081 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.21:54:30.086 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+26-06-21.21:58:25.114 [main            ] INFO  Application            - Starting Application using Java 1.8.0_391 on DESKTOP-36VFUBG with PID 22428 (E:\project\packageManager\packageManager-app\target\classes started by zzuwjx in E:\project\packageManager)
+26-06-21.21:58:25.117 [main            ] DEBUG Application            - Running with Spring Boot v2.7.12, Spring v5.3.27
+26-06-21.21:58:25.118 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+26-06-21.21:58:28.155 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+26-06-21.21:58:28.181 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+26-06-21.21:58:28.183 [main            ] INFO  StandardService        - Starting service [Tomcat]
+26-06-21.21:58:28.183 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+26-06-21.21:58:28.513 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+26-06-21.21:58:28.513 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3343 ms
+26-06-21.21:58:29.689 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+26-06-21.21:58:29.718 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+26-06-21.21:58:29.744 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+26-06-21.21:58:29.808 [main            ] INFO  Application            - Started Application in 5.575 seconds (JVM running for 7.518)
+26-06-21.21:58:30.774 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Starting...
+26-06-21.21:58:30.789 [RMI TCP Connection(1)-192.168.72.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+26-06-21.21:58:30.789 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+26-06-21.21:58:30.790 [RMI TCP Connection(1)-192.168.72.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+26-06-21.21:58:30.979 [RMI TCP Connection(2)-192.168.72.1] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+26-06-21.21:58:32.914 [http-nio-8091-exec-1] INFO  PackageController      - 查询统计概览
+26-06-21.21:58:32.947 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:58:32.964 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:58:32.978 [http-nio-8091-exec-1] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:58:32.979 [http-nio-8091-exec-1] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:58:32.979 [http-nio-8091-exec-1] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:58:32.980 [http-nio-8091-exec-1] DEBUG countPending           - <==      Total: 1
+26-06-21.21:58:32.981 [http-nio-8091-exec-1] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:58:32.981 [http-nio-8091-exec-1] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:58:32.981 [http-nio-8091-exec-1] DEBUG countStale             - <==      Total: 1
+26-06-21.21:58:32.982 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:58:32.982 [http-nio-8091-exec-1] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:58:32.983 [http-nio-8091-exec-1] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:58:35.837 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:58:35.860 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:58:35.860 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:58:35.869 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:58:35.880 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:58:35.881 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:58:35.881 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.21:58:54.845 [http-nio-8091-exec-3] INFO  PackageController      - 查询统计概览
+26-06-21.21:58:54.846 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:58:54.846 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:58:54.847 [http-nio-8091-exec-3] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:58:54.847 [http-nio-8091-exec-3] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:58:54.848 [http-nio-8091-exec-3] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:58:54.848 [http-nio-8091-exec-3] DEBUG countPending           - <==      Total: 1
+26-06-21.21:58:54.849 [http-nio-8091-exec-3] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:58:54.849 [http-nio-8091-exec-3] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:58:54.851 [http-nio-8091-exec-3] DEBUG countStale             - <==      Total: 1
+26-06-21.21:58:54.851 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:58:54.851 [http-nio-8091-exec-3] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:58:54.852 [http-nio-8091-exec-3] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:59:03.026 [http-nio-8091-exec-2] INFO  AuthController         - 登录请求: {"password":"admin123","username":"admin"}
+26-06-21.21:59:03.186 [http-nio-8091-exec-5] INFO  PackageController      - 查询统计概览
+26-06-21.21:59:03.186 [http-nio-8091-exec-5] DEBUG countTodayCheckin      - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(checkin_time) = CURDATE()
+26-06-21.21:59:03.186 [http-nio-8091-exec-5] DEBUG countTodayCheckin      - ==> Parameters: 
+26-06-21.21:59:03.187 [http-nio-8091-exec-5] DEBUG countTodayCheckin      - <==      Total: 1
+26-06-21.21:59:03.187 [http-nio-8091-exec-5] DEBUG countPending           - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0
+26-06-21.21:59:03.187 [http-nio-8091-exec-5] DEBUG countPending           - ==> Parameters: 
+26-06-21.21:59:03.188 [http-nio-8091-exec-5] DEBUG countPending           - <==      Total: 1
+26-06-21.21:59:03.188 [http-nio-8091-exec-5] DEBUG countStale             - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = 0 AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:59:03.188 [http-nio-8091-exec-5] DEBUG countStale             - ==> Parameters: 
+26-06-21.21:59:03.189 [http-nio-8091-exec-5] DEBUG countStale             - <==      Total: 1
+26-06-21.21:59:03.189 [http-nio-8091-exec-5] DEBUG countTodayPickup       - ==>  Preparing: SELECT COUNT(*) FROM package WHERE DATE(pickup_time) = CURDATE()
+26-06-21.21:59:03.189 [http-nio-8091-exec-5] DEBUG countTodayPickup       - ==> Parameters: 
+26-06-21.21:59:03.191 [http-nio-8091-exec-5] DEBUG countTodayPickup       - <==      Total: 1
+26-06-21.21:59:05.338 [http-nio-8091-exec-6] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:59:05.339 [http-nio-8091-exec-6] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:59:05.340 [http-nio-8091-exec-6] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:59:05.344 [http-nio-8091-exec-6] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:59:05.345 [http-nio-8091-exec-6] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:59:05.346 [http-nio-8091-exec-6] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:59:05.350 [http-nio-8091-exec-6] DEBUG countPage              - <==      Total: 1
+26-06-21.21:59:07.589 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:59:07.590 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:59:07.590 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:59:07.591 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 2
+26-06-21.21:59:07.592 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:59:07.592 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:59:07.593 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.21:59:08.006 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=desc, page=1, size=20
+26-06-21.21:59:08.006 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:59:08.006 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:59:08.008 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 13
+26-06-21.21:59:08.009 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.21:59:08.010 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:59:08.010 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.21:59:57.396 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:59:57.396 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:59:57.397 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.21:59:57.398 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 2
+26-06-21.21:59:57.399 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:59:57.399 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.21:59:57.399 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.21:59:58.674 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.21:59:58.674 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.21:59:58.675 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.21:59:58.677 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 20
+26-06-21.21:59:58.677 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.21:59:58.677 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.21:59:58.678 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.22:00:14.387 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=14442308118, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.22:00:14.388 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE (waybill_no LIKE CONCAT('%', ?, '%') OR phone LIKE CONCAT('%', ?, '%') OR courier LIKE CONCAT('%', ?, '%') OR pickup_code LIKE CONCAT('%', ?, '%')) AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.22:00:14.389 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 14442308118(String), 14442308118(String), 14442308118(String), 14442308118(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:00:14.392 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 1
+26-06-21.22:00:14.394 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE (waybill_no LIKE CONCAT('%', ?, '%') OR phone LIKE CONCAT('%', ?, '%') OR courier LIKE CONCAT('%', ?, '%') OR pickup_code LIKE CONCAT('%', ?, '%')) AND status = ?
+26-06-21.22:00:14.394 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 14442308118(String), 14442308118(String), 14442308118(String), 14442308118(String), 0(Integer)
+26-06-21.22:00:14.395 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.22:00:29.675 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=14442308118, keyword=null, status=0, stale=null, sortOrder=desc, page=1, size=20
+26-06-21.22:00:29.676 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE phone_suffix = ? AND status = ? ORDER BY checkin_time DESC LIMIT ?, ?
+26-06-21.22:00:29.676 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 14442308118(String), 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:00:29.677 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 0
+26-06-21.22:00:29.677 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE phone_suffix = ? AND status = ?
+26-06-21.22:00:29.678 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 14442308118(String), 0(Integer)
+26-06-21.22:00:29.679 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.22:00:40.267 [http-nio-8091-exec-3] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:00:40.267 [http-nio-8091-exec-3] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:00:40.267 [http-nio-8091-exec-3] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:00:40.270 [http-nio-8091-exec-3] DEBUG queryPage              - <==      Total: 20
+26-06-21.22:00:40.271 [http-nio-8091-exec-3] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:00:40.272 [http-nio-8091-exec-3] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.22:00:40.273 [http-nio-8091-exec-3] DEBUG countPage              - <==      Total: 1
+26-06-21.22:00:50.029 [http-nio-8091-exec-2] INFO  PackageController      - 确认取件: id=1bbef0b66a4f447badd4afa0
+26-06-21.22:00:50.030 [http-nio-8091-exec-2] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.22:00:50.030 [http-nio-8091-exec-2] DEBUG queryByBizId           - ==> Parameters: 1bbef0b66a4f447badd4afa0(String)
+26-06-21.22:00:50.031 [http-nio-8091-exec-2] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.22:00:50.040 [http-nio-8091-exec-2] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.22:00:50.040 [http-nio-8091-exec-2] DEBUG updatePickup           - ==> Parameters: 1bbef0b66a4f447badd4afa0(String)
+26-06-21.22:00:50.043 [http-nio-8091-exec-2] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.22:00:50.058 [http-nio-8091-exec-5] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:00:50.058 [http-nio-8091-exec-5] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:00:50.058 [http-nio-8091-exec-5] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:00:50.060 [http-nio-8091-exec-5] DEBUG queryPage              - <==      Total: 20
+26-06-21.22:00:50.062 [http-nio-8091-exec-5] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:00:50.062 [http-nio-8091-exec-5] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.22:00:50.063 [http-nio-8091-exec-5] DEBUG countPage              - <==      Total: 1
+26-06-21.22:00:52.078 [http-nio-8091-exec-6] INFO  PackageController      - 确认取件: id=98c3b04053a344d3a18f9031
+26-06-21.22:00:52.079 [http-nio-8091-exec-6] DEBUG queryByBizId           - ==>  Preparing: SELECT * FROM package WHERE biz_id = ?
+26-06-21.22:00:52.079 [http-nio-8091-exec-6] DEBUG queryByBizId           - ==> Parameters: 98c3b04053a344d3a18f9031(String)
+26-06-21.22:00:52.081 [http-nio-8091-exec-6] DEBUG queryByBizId           - <==      Total: 1
+26-06-21.22:00:52.083 [http-nio-8091-exec-6] DEBUG updatePickup           - ==>  Preparing: UPDATE package SET status = 1, pickup_time = NOW() WHERE biz_id = ? AND status = 0
+26-06-21.22:00:52.084 [http-nio-8091-exec-6] DEBUG updatePickup           - ==> Parameters: 98c3b04053a344d3a18f9031(String)
+26-06-21.22:00:52.085 [http-nio-8091-exec-6] DEBUG updatePickup           - <==    Updates: 1
+26-06-21.22:00:52.103 [http-nio-8091-exec-7] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:00:52.104 [http-nio-8091-exec-7] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:00:52.104 [http-nio-8091-exec-7] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:00:52.106 [http-nio-8091-exec-7] DEBUG queryPage              - <==      Total: 20
+26-06-21.22:00:52.107 [http-nio-8091-exec-7] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:00:52.107 [http-nio-8091-exec-7] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.22:00:52.108 [http-nio-8091-exec-7] DEBUG countPage              - <==      Total: 1
+26-06-21.22:01:02.698 [http-nio-8091-exec-8] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:01:02.698 [http-nio-8091-exec-8] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:01:02.698 [http-nio-8091-exec-8] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.22:01:02.699 [http-nio-8091-exec-8] DEBUG queryPage              - <==      Total: 4
+26-06-21.22:01:02.700 [http-nio-8091-exec-8] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:01:02.700 [http-nio-8091-exec-8] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.22:01:02.700 [http-nio-8091-exec-8] DEBUG countPage              - <==      Total: 1
+26-06-21.22:01:10.521 [http-nio-8091-exec-9] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:01:10.522 [http-nio-8091-exec-9] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:01:10.522 [http-nio-8091-exec-9] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:01:10.523 [http-nio-8091-exec-9] DEBUG queryPage              - <==      Total: 20
+26-06-21.22:01:10.524 [http-nio-8091-exec-9] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:01:10.524 [http-nio-8091-exec-9] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.22:01:10.524 [http-nio-8091-exec-9] DEBUG countPage              - <==      Total: 1
+26-06-21.22:02:41.868 [http-nio-8091-exec-10] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:02:41.868 [http-nio-8091-exec-10] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:02:41.869 [http-nio-8091-exec-10] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.22:02:41.870 [http-nio-8091-exec-10] DEBUG queryPage              - <==      Total: 4
+26-06-21.22:02:41.871 [http-nio-8091-exec-10] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:02:41.871 [http-nio-8091-exec-10] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.22:02:41.872 [http-nio-8091-exec-10] DEBUG countPage              - <==      Total: 1
+26-06-21.22:05:10.456 [http-nio-8091-exec-1] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=0, stale=true, sortOrder=asc, page=1, size=20
+26-06-21.22:05:10.457 [http-nio-8091-exec-1] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR) ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:05:10.457 [http-nio-8091-exec-1] DEBUG queryPage              - ==> Parameters: 0(Integer), 0(Integer), 20(Integer)
+26-06-21.22:05:10.459 [http-nio-8091-exec-1] DEBUG queryPage              - <==      Total: 13
+26-06-21.22:05:10.460 [http-nio-8091-exec-1] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ? AND checkin_time < DATE_SUB(NOW(), INTERVAL 48 HOUR)
+26-06-21.22:05:10.460 [http-nio-8091-exec-1] DEBUG countPage              - ==> Parameters: 0(Integer)
+26-06-21.22:05:10.461 [http-nio-8091-exec-1] DEBUG countPage              - <==      Total: 1
+26-06-21.22:05:15.651 [http-nio-8091-exec-4] INFO  PackageController      - 查询包裹: phone=null, keyword=null, status=1, stale=null, sortOrder=asc, page=1, size=20
+26-06-21.22:05:15.652 [http-nio-8091-exec-4] DEBUG queryPage              - ==>  Preparing: SELECT * FROM package WHERE status = ? ORDER BY checkin_time ASC LIMIT ?, ?
+26-06-21.22:05:15.652 [http-nio-8091-exec-4] DEBUG queryPage              - ==> Parameters: 1(Integer), 0(Integer), 20(Integer)
+26-06-21.22:05:15.653 [http-nio-8091-exec-4] DEBUG queryPage              - <==      Total: 4
+26-06-21.22:05:15.653 [http-nio-8091-exec-4] DEBUG countPage              - ==>  Preparing: SELECT COUNT(*) FROM package WHERE status = ?
+26-06-21.22:05:15.654 [http-nio-8091-exec-4] DEBUG countPage              - ==> Parameters: 1(Integer)
+26-06-21.22:05:15.654 [http-nio-8091-exec-4] DEBUG countPage              - <==      Total: 1
+26-06-21.22:07:12.230 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+26-06-21.22:07:12.235 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.

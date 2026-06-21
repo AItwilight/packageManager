@@ -52,8 +52,14 @@
             <if test="status != null">
                 AND status = #{status}
             </if>
+            <if test="stale != null and stale == true">
+                AND checkin_time &lt; DATE_SUB(NOW(), INTERVAL 48 HOUR)
+            </if>
         </where>
-        ORDER BY create_time DESC
+        <choose>
+            <when test="sortOrder == 'asc'">ORDER BY checkin_time ASC</when>
+            <otherwise>ORDER BY checkin_time DESC</otherwise>
+        </choose>
         LIMIT #{offset}, #{limit}
     </select>
 
@@ -72,6 +78,9 @@
             </if>
             <if test="status != null">
                 AND status = #{status}
+            </if>
+            <if test="stale != null and stale == true">
+                AND checkin_time &lt; DATE_SUB(NOW(), INTERVAL 48 HOUR)
             </if>
         </where>
     </select>

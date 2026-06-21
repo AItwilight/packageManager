@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS package (
     shelf        VARCHAR(4)     NOT NULL COMMENT '货架位置(格式:大写字母-两位数字,如A-13)',
     status       TINYINT        NOT NULL DEFAULT 0 COMMENT '0待取件 1已取件',
     checkin_time DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '入库时间',
-    pickup_time  DATETIME       NULL COMMENT '取件时间',
+    pickup_time  DATETIME       NULL COMMENT '出库时间',
     pickup_code  VARCHAR(10)    NULL COMMENT '取件码(货架-流水号,如A-13-0001)',
     user_id      BIGINT         NULL COMMENT '入库操作人ID',
     phone_suffix VARCHAR(4)     GENERATED ALWAYS AS (RIGHT(phone, 4)) STORED COMMENT '手机号后四位',

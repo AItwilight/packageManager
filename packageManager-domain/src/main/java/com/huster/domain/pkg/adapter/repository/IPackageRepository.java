@@ -14,10 +14,11 @@ public interface IPackageRepository {
     PackageEntity queryByWaybillNoAndStatus(String waybillNo, Integer statusCode);
 
     /** 分页查询 */
-    List<PackageEntity> queryPage(String phone, String keyword, Integer statusCode, int offset, int limit);
+    List<PackageEntity> queryPage(String phone, String keyword, Integer statusCode,
+                                  Boolean stale, String sortOrder, int offset, int limit);
 
     /** 统计总数 */
-    int countPage(String phone, String keyword, Integer statusCode);
+    int countPage(String phone, String keyword, Integer statusCode, Boolean stale);
 
     /** 统计概览：今日入库数 */
     int countTodayCheckin();

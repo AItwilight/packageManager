@@ -106,14 +106,21 @@ public class PackageController implements IPackageManageService {
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) Integer status,
+            @RequestParam(required = false) Boolean stale,
+            @RequestParam(required = false) String sortOrder,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "20") Integer size) {
         try {
-            log.info("查询包裹: phone={}, keyword={}, status={}, page={}, size={}",
-                    phone, keyword, status, page, size);
+            // 排序参数白名单校验
+            if (sortOrder != null && !"asc".equalsIgnoreCase(sortOrder) && !"desc".equalsIgnoreCase(sortOrder)) {
+                sortOrder = null;
+            }
+            log.info("查询包裹: phone={}, keyword={}, status={}, stale={}, sortOrder={}, page={}, size={}",
+                    phone, keyword, status, stale, sortOrder, page, size);
 
-            List<PackageEntity> entities = packageService.queryList(phone, keyword, status, page, size);
-            int total = packageService.countTotal(phone, keyword, status);
+            List<PackageEntity> entities = packageService.queryList(
+                    phone, keyword, status, stale, sortOrder, page, size);
+            int total = packageService.countTotal(phone, keyword, status, stale);
 
             List<PackageResponseDTO> list = entities.stream().map(e -> {
                 CourierCompanyEnum cc = e.getCourierCompany();

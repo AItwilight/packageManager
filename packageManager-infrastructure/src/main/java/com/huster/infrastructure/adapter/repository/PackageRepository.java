@@ -50,11 +50,13 @@ public class PackageRepository implements IPackageRepository {
 
     @Override
     public List<PackageEntity> queryPage(String phone, String keyword, Integer statusCode,
-                                          int offset, int limit) {
+                                          Boolean stale, String sortOrder, int offset, int limit) {
         PackagePO req = PackagePO.builder()
                 .phone(phone)
                 .waybillNo(keyword)
                 .status(statusCode)
+                .stale(stale)
+                .sortOrder(sortOrder)
                 .offset(offset)
                 .limit(limit)
                 .build();
@@ -63,11 +65,12 @@ public class PackageRepository implements IPackageRepository {
     }
 
     @Override
-    public int countPage(String phone, String keyword, Integer statusCode) {
+    public int countPage(String phone, String keyword, Integer statusCode, Boolean stale) {
         PackagePO req = PackagePO.builder()
                 .phone(phone)
                 .waybillNo(keyword)
                 .status(statusCode)
+                .stale(stale)
                 .build();
         return dao.countPage(req);
     }

@@ -31,4 +31,8 @@ public class PackagePO {
     private Integer offset;
     /** 分页大小（仅查询用，非DB字段） */
     private Integer limit;
+    /** 仅查询滞留包裹（仅查询用，非DB字段） */
+    private Boolean stale;
+    /** 排序方向 asc/desc（仅查询用，非DB字段） */
+    private String sortOrder;
 }

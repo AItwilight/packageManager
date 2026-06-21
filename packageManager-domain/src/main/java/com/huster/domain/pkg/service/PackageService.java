@@ -33,14 +33,15 @@ public class PackageService implements IPackageService {
     }
 
     @Override
-    public List<PackageEntity> queryList(String phone, String keyword, Integer statusCode, int page, int size) {
+    public List<PackageEntity> queryList(String phone, String keyword, Integer statusCode,
+                                          Boolean stale, String sortOrder, int page, int size) {
         int offset = (page - 1) * size;
-        return repository.queryPage(phone, keyword, statusCode, offset, size);
+        return repository.queryPage(phone, keyword, statusCode, stale, sortOrder, offset, size);
     }
 
     @Override
-    public int countTotal(String phone, String keyword, Integer statusCode) {
-        return repository.countPage(phone, keyword, statusCode);
+    public int countTotal(String phone, String keyword, Integer statusCode, Boolean stale) {
+        return repository.countPage(phone, keyword, statusCode, stale);
     }
 
     @Override
