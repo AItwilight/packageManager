@@ -44,10 +44,16 @@
         <el-table-column prop="courierDesc" label="快递公司" width="90" />
         <el-table-column prop="shelf" label="货架" width="80" />
         <el-table-column prop="pickupCode" label="取件码" width="120" />
-        <el-table-column label="入库时间" width="180">
+        <el-table-column label="入库时间" width="170">
           <template #default="{ row }">
             <span>{{ row.checkinTime }}</span>
             <el-tag v-if="row.stale" type="danger" size="small" style="margin-left: 6px">滞留</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="出库时间" width="170">
+          <template #default="{ row }">
+            <span v-if="row.pickupTime">{{ row.pickupTime }}</span>
+            <span v-else style="color: #c0c4cc">-</span>
           </template>
         </el-table-column>
         <el-table-column label="状态" width="100">
