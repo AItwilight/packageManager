@@ -1,5 +1,10 @@
 server:
   port: 8091
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 # 线程池配置
 thread:
@@ -32,12 +37,15 @@ spring:
 
 # MyBatis 配置
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
   configuration:
     'map-underscore-to-camel-case': true
 
 # 日志
 logging:
+  charset:
+    console: UTF-8
+    file: UTF-8
   level:
     root: info
     com.huster: debug

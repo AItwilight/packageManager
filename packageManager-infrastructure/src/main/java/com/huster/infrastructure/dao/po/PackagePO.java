@@ -23,4 +23,12 @@ public class PackagePO {
     private Date pickupTime;
     private Date createTime;
     private Date updateTime;
+    /** 取件码(货架-流水号,如A-13-0001) */
+    private String pickupCode;
+    /** 入库操作人ID */
+    private Long userId;
+    /** 分页偏移量（仅查询用，非DB字段） */
+    private Integer offset;
+    /** 分页大小（仅查询用，非DB字段） */
+    private Integer limit;
 }

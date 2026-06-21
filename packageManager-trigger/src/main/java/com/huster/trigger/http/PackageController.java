@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,9 @@ public class PackageController implements IPackageManageService {
 
     @Resource
     private IPackageService packageService;
+
+    @Resource
+    private HttpServletRequest httpServletRequest;
 
     private static final DateTimeFormatter DT_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -56,6 +60,11 @@ public class PackageController implements IPackageManageService {
             if (StringUtils.isBlank(request.getShelf())) {
                 return Response.fail(ResponseCode.ILLEGAL_PARAMETER.getCode(), "货架位置不能为空");
             }
+            // 货架格式校验：大写字母-两位数字（如 A-13）
+            if (!request.getShelf().matches("^[A-Z]-\\d{2}$")) {
+                return Response.fail(ResponseCode.SHELF_FORMAT_ERROR.getCode(),
+                        ResponseCode.SHELF_FORMAT_ERROR.getInfo());
+            }
 
             // 校验快递公司编码
             CourierCompanyEnum courier;
@@ -65,15 +74,19 @@ public class PackageController implements IPackageManageService {
                 return Response.fail(ResponseCode.ILLEGAL_PARAMETER.getCode(), "无效的快递公司编码");
             }
 
+            // 从JWT中获取当前操作人ID
+            Long userId = (Long) httpServletRequest.getAttribute("userId");
+
             // 创建聚合
             PackageAggregate aggregate = PackageAggregate.createForCheckin(
-                    request.getWaybillNo(), request.getPhone(), courier, request.getShelf());
+                    request.getWaybillNo(), request.getPhone(), courier, request.getShelf(), userId);
 
             // 入库
             PackageEntity entity = packageService.checkin(aggregate);
 
             Map<String, String> data = new HashMap<>();
             data.put("id", entity.getId());
+            data.put("pickupCode", entity.getPickupCode());
             return Response.success(data);
 
         } catch (AppException e) {
@@ -111,6 +124,7 @@ public class PackageController implements IPackageManageService {
                         .courier(cc != null ? cc.getCode() : "")
                         .courierDesc(cc != null ? cc.getInfo() : "")
                         .shelf(e.getShelfLocation())
+                        .pickupCode(e.getPickupCode())
                         .status(e.getStatus().getCode())
                         .statusDesc(e.getStatus().getInfo())
                         .checkinTime(e.getCheckinTime() != null ? e.getCheckinTime().format(DT_FMT) : null)
@@ -167,6 +181,13 @@ public class PackageController implements IPackageManageService {
 
             if (StringUtils.isBlank(request.getId())) {
                 return Response.fail(ResponseCode.ILLEGAL_PARAMETER.getCode(), "包裹ID不能为空");
+            }
+            if (StringUtils.isBlank(request.getShelf())) {
+                return Response.fail(ResponseCode.ILLEGAL_PARAMETER.getCode(), "货架位置不能为空");
+            }
+            if (!request.getShelf().matches("^[A-Z]-\\d{2}$")) {
+                return Response.fail(ResponseCode.SHELF_FORMAT_ERROR.getCode(),
+                        ResponseCode.SHELF_FORMAT_ERROR.getInfo());
             }
 
             CourierCompanyEnum courier;

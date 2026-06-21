@@ -13,14 +13,16 @@
         <result column="status" property="status"/>
         <result column="checkin_time" property="checkinTime"/>
         <result column="pickup_time" property="pickupTime"/>
+        <result column="pickup_code" property="pickupCode"/>
+        <result column="user_id" property="userId"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <insert id="insert" parameterType="com.huster.infrastructure.dao.po.PackagePO"
             useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO package (biz_id, waybill_no, phone, courier, shelf, status, checkin_time)
-        VALUES (#{bizId}, #{waybillNo}, #{phone}, #{courier}, #{shelf}, #{status}, #{checkinTime})
+        INSERT INTO package (biz_id, waybill_no, phone, courier, shelf, status, checkin_time, pickup_code, user_id)
+        VALUES (#{bizId}, #{waybillNo}, #{phone}, #{courier}, #{shelf}, #{status}, #{checkinTime}, #{pickupCode}, #{userId})
     </insert>
 
     <select id="queryByBizId" parameterType="string" resultMap="BaseResultMap">
@@ -39,19 +41,20 @@
         SELECT * FROM package
         <where>
             <if test="phone != null and phone != ''">
-                AND phone = #{phone}
+                AND phone_suffix = #{phone}
             </if>
             <if test="waybillNo != null and waybillNo != ''">
                 AND (waybill_no LIKE CONCAT('%', #{waybillNo}, '%')
                      OR phone LIKE CONCAT('%', #{waybillNo}, '%')
-                     OR courier LIKE CONCAT('%', #{waybillNo}, '%'))
+                     OR courier LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR pickup_code LIKE CONCAT('%', #{waybillNo}, '%'))
             </if>
             <if test="status != null">
                 AND status = #{status}
             </if>
         </where>
         ORDER BY create_time DESC
-        LIMIT #{shelf}, #{courier}
+        LIMIT #{offset}, #{limit}
     </select>
 
     <select id="countPage" parameterType="com.huster.infrastructure.dao.po.PackagePO"
@@ -59,12 +62,13 @@
         SELECT COUNT(*) FROM package
         <where>
             <if test="phone != null and phone != ''">
-                AND phone = #{phone}
+                AND phone_suffix = #{phone}
             </if>
             <if test="waybillNo != null and waybillNo != ''">
                 AND (waybill_no LIKE CONCAT('%', #{waybillNo}, '%')
                      OR phone LIKE CONCAT('%', #{waybillNo}, '%')
-                     OR courier LIKE CONCAT('%', #{waybillNo}, '%'))
+                     OR courier LIKE CONCAT('%', #{waybillNo}, '%')
+                     OR pickup_code LIKE CONCAT('%', #{waybillNo}, '%'))
             </if>
             <if test="status != null">
                 AND status = #{status}
@@ -101,7 +105,8 @@
         SET waybill_no = #{waybillNo},
             phone = #{phone},
             courier = #{courier},
-            shelf = #{shelf}
+            shelf = #{shelf},
+            pickup_code = #{pickupCode}
         WHERE biz_id = #{bizId} AND status = 0
     </update>
 

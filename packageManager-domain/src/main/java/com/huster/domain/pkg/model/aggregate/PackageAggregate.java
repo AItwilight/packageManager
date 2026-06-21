@@ -20,7 +20,7 @@ public class PackageAggregate {
 
     /** 静态工厂：创建新入库包裹 */
     public static PackageAggregate createForCheckin(
-            String waybillNo, String phone, CourierCompanyEnum courier, String shelf) {
+            String waybillNo, String phone, CourierCompanyEnum courier, String shelf, Long userId) {
         PackageEntity entity = PackageEntity.builder()
                 .id(UUID.randomUUID().toString().replace("-", "").substring(0, 24))
                 .waybillNo(waybillNo)
@@ -29,6 +29,7 @@ public class PackageAggregate {
                 .shelfLocation(shelf)
                 .status(PackageStatusEnum.PENDING)
                 .checkinTime(LocalDateTime.now())
+                .userId(userId)
                 .build();
         PackageAggregate aggregate = new PackageAggregate();
         aggregate.setPackageEntity(entity);

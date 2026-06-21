@@ -43,6 +43,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                     .parseClaimsJws(token)
                     .getBody();
             request.setAttribute("username", claims.getSubject());
+            request.setAttribute("userId", claims.get("userId", Long.class));
             return true;
         } catch (ExpiredJwtException e) {
             sendUnauthorized(response, "Token expired");
@@ -61,11 +62,12 @@ public class JwtInterceptor implements HandlerInterceptor {
     }
 
     /** 生成 JWT Token */
-    public static String generateToken(String username) {
+    public static String generateToken(String username, Long userId) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + EXPIRATION_MS);
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userId", userId)
                 .setIssuedAt(now)
                 .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, SECRET)

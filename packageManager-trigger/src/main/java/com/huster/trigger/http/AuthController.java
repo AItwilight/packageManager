@@ -40,7 +40,7 @@ public class AuthController {
             }
 
             // 2. 查询用户
-            String sql = "SELECT username, password FROM sys_user WHERE username = ?";
+            String sql = "SELECT id, username, password FROM sys_user WHERE username = ?";
             Map<String, Object> user;
             try {
                 user = jdbcTemplate.queryForMap(sql, request.getUsername());
@@ -57,7 +57,8 @@ public class AuthController {
             }
 
             // 4. 生成 Token
-            String token = JwtInterceptor.generateToken(request.getUsername());
+            Long userId = ((Number) user.get("id")).longValue();
+            String token = JwtInterceptor.generateToken(request.getUsername(), userId);
             Map<String, String> data = new HashMap<>();
             data.put("token", token);
             return Response.success(data);

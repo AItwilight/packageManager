@@ -16,6 +16,7 @@ public class PackageResponseDTO {
     private String courier;
     private String courierDesc;
     private String shelf;
+    private String pickupCode;
     private Integer status;
     private String statusDesc;
     private String checkinTime;

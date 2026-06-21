@@ -30,6 +30,10 @@ public class PackageEntity {
     private LocalDateTime checkinTime;
     /** 取件时间 */
     private LocalDateTime pickupTime;
+    /** 取件码(货架-流水号,如A-13-0001) */
+    private String pickupCode;
+    /** 入库操作人ID */
+    private Long userId;
 
     /** 是否滞留（入库超48小时且未取件） */
     public boolean isStale() {

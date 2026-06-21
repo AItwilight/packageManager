@@ -24,6 +24,8 @@ public enum ResponseCode {
     WAYBILL_DUPLICATE("E0202", "该运单号已存在待取件包裹"),
     ALREADY_PICKED("E0203", "该包裹已被取走"),
     CANT_EDIT_PICKED("E0204", "已取件包裹不可编辑"),
+    SHELF_FORMAT_ERROR("E0205", "货架格式错误，应为大写字母-两位数字(如A-13)"),
+    SERIAL_OVERFLOW("E0206", "当日入库已达上限(9999)"),
     ;
 
     private String code;
