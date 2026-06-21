@@ -60,3 +60,5 @@ INSERT INTO sys_user (username, password) VALUES ('admin', '$2a$10$IH2zGFqSObWXN
 -- ALTER TABLE package ADD INDEX idx_pickup_code (pickup_code);
 -- ALTER TABLE package ADD INDEX idx_phone_suffix (phone_suffix);
 -- ALTER TABLE package ADD INDEX idx_user_id (user_id);
+-- ALTER TABLE package ADD INDEX idx_status_checkin (status, checkin_time);
+-- ALTER TABLE package ADD INDEX idx_pickup_time (pickup_time);

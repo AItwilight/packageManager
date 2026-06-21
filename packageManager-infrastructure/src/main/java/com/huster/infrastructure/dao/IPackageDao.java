@@ -26,7 +26,7 @@ public interface IPackageDao {
 
     int countTodayPickup();
 
-    int updatePickup(String bizId);
+    int updatePickup(PackagePO po);
 
     int updateInfo(PackagePO po);
 }

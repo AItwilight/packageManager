@@ -19,6 +19,10 @@ public class PackageService implements IPackageService {
     @Resource
     private IPackageRepository repository;
 
+//    public PackageService(IPackageRepository repository) {
+//        this.repository = repository;
+//    }
+
     @Override
     public PackageEntity checkin(PackageAggregate aggregate) {
         // 校验：同运单号不允许重复待取件

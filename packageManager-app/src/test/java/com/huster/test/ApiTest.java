@@ -36,8 +36,8 @@ public class ApiTest {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    private String token;
-    private String testPackageId;
+    private static String token;
+    private static String testPackageId;
 
     private String url(String path) {
         return "http://localhost:" + port + path;

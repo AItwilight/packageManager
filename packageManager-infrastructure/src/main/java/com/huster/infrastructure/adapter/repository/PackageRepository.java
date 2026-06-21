@@ -119,7 +119,11 @@ public class PackageRepository implements IPackageRepository {
     @Override
     @Transactional(timeout = 500)
     public int updatePickup(String bizId) {
-        return dao.updatePickup(bizId);
+        PackagePO po = PackagePO.builder()
+                .bizId(bizId)
+                .pickupTime(new Date())
+                .build();
+        return dao.updatePickup(po);
     }
 
     @Override

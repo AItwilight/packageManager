@@ -87,7 +87,8 @@
 
     <select id="countTodayCheckin" resultType="int">
         SELECT COUNT(*) FROM package
-        WHERE DATE(checkin_time) = CURDATE()
+        WHERE checkin_time >= CURDATE()
+          AND checkin_time &lt; DATE_ADD(CURDATE(), INTERVAL 1 DAY)
     </select>
 
     <select id="countPending" resultType="int">
@@ -101,11 +102,12 @@
 
     <select id="countTodayPickup" resultType="int">
         SELECT COUNT(*) FROM package
-        WHERE DATE(pickup_time) = CURDATE()
+        WHERE pickup_time >= CURDATE()
+          AND pickup_time &lt; DATE_ADD(CURDATE(), INTERVAL 1 DAY)
     </select>
 
-    <update id="updatePickup" parameterType="string">
-        UPDATE package SET status = 1, pickup_time = NOW()
+    <update id="updatePickup" parameterType="com.huster.infrastructure.dao.po.PackagePO">
+        UPDATE package SET status = 1, pickup_time = #{pickupTime}
         WHERE biz_id = #{bizId} AND status = 0
     </update>
 
