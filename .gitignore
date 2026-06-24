@@ -56,7 +56,7 @@ dist/
 .DS_Store
 
 # 忽略这两个已提交过的文档目录
-docs/ddd-development-manual/
+#docs/ddd-development-manual/
 docs/superpowers/
 /.superpowers/
 /.idea/

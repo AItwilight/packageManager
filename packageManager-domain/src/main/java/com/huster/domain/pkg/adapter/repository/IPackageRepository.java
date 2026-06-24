@@ -5,6 +5,9 @@ import com.huster.domain.pkg.model.entity.PackageEntity;
 
 import java.util.List;
 
+/**
+ * @author zzuwjx
+ */
 public interface IPackageRepository {
 
     /** 按业务ID查询 */

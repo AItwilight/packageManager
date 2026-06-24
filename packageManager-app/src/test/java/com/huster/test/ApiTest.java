@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huster.api.dto.*;
 import com.huster.api.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.*;
 
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -38,6 +40,7 @@ public class ApiTest {
 
     private static String token;
     private static String testPackageId;
+    private static String testWaybillNo;
 
     private String url(String path) {
         return "http://localhost:" + port + path;
@@ -63,6 +66,7 @@ public class ApiTest {
         assertEquals("0000", json.getString("code"));
         assertNotNull(json.getJSONObject("data").getString("token"));
         token = json.getJSONObject("data").getString("token");
+        log.info("test01_login_success: 登录成功, token={}", token);
     }
 
     // ==================== T2: 登录失败 ====================
@@ -83,17 +87,24 @@ public class ApiTest {
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("E0101", json.getString("code"));
+        log.info("test02_login_fail: 密码错误登录失败, code={}", json.getString("code"));
     }
 
     // ==================== T3: 正常入库 ====================
-
     @Test
     public void test03_checkin_success() {
+        if (token == null) {
+            test01_login_success();
+        }
+        // 使用时间戳生成唯一运单号，避免重复运行冲突
+        if (testWaybillNo == null) {
+            testWaybillNo = "SF" + System.currentTimeMillis();
+        }
         CheckinRequestDTO req = new CheckinRequestDTO();
-        req.setWaybillNo("SF20260620001");
+        req.setWaybillNo(testWaybillNo);
         req.setPhone("13800138000");
         req.setCourier("SF");
-        req.setShelf("A-01");
+        req.setShelf("A-56");
 
         HttpHeaders headers = authHeaders();
         HttpEntity<String> entity = new HttpEntity<>(JSON.toJSONString(req), headers);
@@ -106,14 +117,22 @@ public class ApiTest {
         assertEquals("0000", json.getString("code"));
         assertNotNull(json.getJSONObject("data").getString("id"));
         testPackageId = json.getJSONObject("data").getString("id");
+        log.info("test03_checkin_success: 入库成功, waybillNo={}, packageId={}", testWaybillNo, testPackageId);
     }
 
     // ==================== T4: 重复运单号入库 ====================
 
     @Test
     public void test04_checkin_duplicate() {
+        if (token == null) {
+            test01_login_success();
+        }
+        // 确保 test03 先执行以生成运单号
+        if (testWaybillNo == null) {
+            test03_checkin_success();
+        }
         CheckinRequestDTO req = new CheckinRequestDTO();
-        req.setWaybillNo("SF20260620001");
+        req.setWaybillNo(testWaybillNo);
         req.setPhone("13800138000");
         req.setCourier("SF");
         req.setShelf("A-02");
@@ -127,12 +146,16 @@ public class ApiTest {
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("E0202", json.getString("code"));
+        log.info("test04_checkin_duplicate: 重复入库验证通过, code={}", json.getString("code"));
     }
 
     // ==================== T5: 入库参数缺失 ====================
 
     @Test
     public void test05_checkin_missing_param() {
+        if (token == null) {
+            test01_login_success();
+        }
         CheckinRequestDTO req = new CheckinRequestDTO();
         req.setWaybillNo("");
         req.setPhone("13800138000");
@@ -148,29 +171,40 @@ public class ApiTest {
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("0002", json.getString("code"));
+        log.info("test05_checkin_missing_param: 参数缺失验证通过, code={}", json.getString("code"));
     }
 
-    // ==================== T6: 按手机号查询 ====================
+    // ==================== T6: 按手机号（后4位）查询 ====================
 
     @Test
     public void test06_query_by_phone() {
+        if (token == null) {
+            test01_login_success();
+        }
         HttpHeaders headers = authHeaders();
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         ResponseEntity<String> resp = restTemplate.exchange(
-                url("/api/v1/package/list?phone=13800138000&page=1&size=20"),
+                url("/api/v1/package/list?phone=8000&page=1&size=20"),
                 HttpMethod.GET, entity, String.class);
 
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("0000", json.getString("code"));
         assertTrue(json.getJSONObject("data").getInteger("total") >= 1);
+        log.info("test06_query_by_phone: 手机号查询成功, total={}", json.getJSONObject("data").getInteger("total"));
     }
 
     // ==================== T7: 确认取件 ====================
 
     @Test
     public void test07_pickup() {
+        if (token == null) {
+            test01_login_success();
+        }
+        if (testPackageId == null) {
+            test03_checkin_success();
+        }
         HttpHeaders headers = authHeaders();
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -181,12 +215,20 @@ public class ApiTest {
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("0000", json.getString("code"));
+        log.info("test07_pickup: 取件成功, packageId={}", testPackageId);
     }
 
     // ==================== T8: 重复取件 ====================
 
     @Test
     public void test08_pickup_duplicate() {
+        if (token == null) {
+            test01_login_success();
+        }
+        if (testPackageId == null) {
+            test03_checkin_success();
+            test07_pickup();
+        }
         HttpHeaders headers = authHeaders();
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -197,12 +239,16 @@ public class ApiTest {
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         JSONObject json = JSON.parseObject(resp.getBody());
         assertEquals("E0203", json.getString("code"));
+        log.info("test08_pickup_duplicate: 重复取件验证通过, code={}", json.getString("code"));
     }
 
     // ==================== T9: 统计概览 ====================
 
     @Test
     public void test09_dashboard_stats() {
+        if (token == null) {
+            test01_login_success();
+        }
         HttpHeaders headers = authHeaders();
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
@@ -218,6 +264,9 @@ public class ApiTest {
         assertNotNull(data.getInteger("pendingTotal"));
         assertNotNull(data.getInteger("staleTotal"));
         assertNotNull(data.getInteger("todayPickup"));
+        log.info("test09_dashboard_stats: 统计概览查询成功, todayCheckin={}, pendingTotal={}, staleTotal={}, todayPickup={}",
+                data.getInteger("todayCheckin"), data.getInteger("pendingTotal"),
+                data.getInteger("staleTotal"), data.getInteger("todayPickup"));
     }
 
     // ==================== T10: 未登录访问 ====================
@@ -232,13 +281,13 @@ public class ApiTest {
                 url("/api/v1/package/checkin"), entity, String.class);
 
         assertEquals(HttpStatus.UNAUTHORIZED, resp.getStatusCode());
+        log.info("test10_unauthorized: 未登录访问验证通过, httpStatus={}", resp.getStatusCodeValue());
     }
 
     // ==================== T11: 批量入库 + 滞留包裹验证 ====================
 
     @Test
     public void test11_bulk_checkin_with_stale() {
-        // 确保已登录（兼容单独运行此用例）
         if (token == null) {
             test01_login_success();
         }
@@ -284,7 +333,7 @@ public class ApiTest {
             bizIds.add(bizId);
         }
 
-        System.out.println("批量入库完成: 共 " + TOTAL + " 条，取件码格式已验证");
+        log.info("test11_bulk_checkin: 批量入库完成, 共 {} 条，取件码格式已验证", TOTAL);
 
         // 2. 将前 STALE_COUNT 条改为滞留（checkin_time 设为 72 小时前）
         for (int i = 0; i < STALE_COUNT; i++) {
@@ -306,10 +355,9 @@ public class ApiTest {
         int staleTotal = stats.getInteger("staleTotal");
         assertTrue("滞留包裹数应 >= " + STALE_COUNT + "，实际: " + staleTotal,
                 staleTotal >= STALE_COUNT);
-        System.out.println("仪表盘统计: todayCheckin=" + stats.getInteger("todayCheckin")
-                + ", pendingTotal=" + stats.getInteger("pendingTotal")
-                + ", staleTotal=" + staleTotal
-                + ", todayPickup=" + stats.getInteger("todayPickup"));
+        log.info("test11_bulk_checkin: 仪表盘统计, todayCheckin={}, pendingTotal={}, staleTotal={}, todayPickup={}",
+                stats.getInteger("todayCheckin"), stats.getInteger("pendingTotal"),
+                staleTotal, stats.getInteger("todayPickup"));
 
         // 4. 查询列表 — 按状态=待取件 + 手机号后四位
         // 取第一个滞留包裹的手机号后四位
@@ -343,7 +391,7 @@ public class ApiTest {
         assertNotNull("列表项应包含 pickupCode", firstItem.getString("pickupCode"));
         assertNotNull("列表项应包含 stale 标记", firstItem.getBoolean("stale"));
 
-        System.out.println("滞留包裹验证通过: 共制造 " + STALE_COUNT + " 条滞留记录");
+        log.info("test11_bulk_checkin: 滞留包裹验证通过, 共制造 {} 条滞留记录", STALE_COUNT);
     }
 
     // ==================== 辅助方法 ====================
